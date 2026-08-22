@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Hekta — social card source</title>
+<!--
+  SOURCE for web/landing/og.png. Render it at exactly 1200x630:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+      --window-size=1200,630 --screenshot=web/landing/og.png \
+      http://localhost:8899/og.html
+
+  This file exists so the card can be re-derived. A committed PNG with no source
+  rots the same way the old hand-made landing JPEGs did — see the header comment
+  in scripts/landing-shots.sh, which is the same lesson written down once already.
+  Nothing links here; it is not part of the site.
+-->
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 84px;
+    position: relative;
+  }
+  .rules {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.09) 0 1px, transparent 1px 96px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 70%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 70%, transparent 100%);
+  }
+  .glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(46% 60% at 82% 52%, rgba(10,132,255,0.30) 0%, rgba(0,0,0,0) 70%);
+  }
+  .inner { position: relative; display: flex; align-items: center; gap: 64px; }
+  .copy { flex: 1 1 auto; }
+  .mark { flex: none; }
+  h1 {
+    font-size: 76px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.02;
+  }
+  h1 em { font-style: normal; color: #0A84FF; }
+  p {
+    margin-top: 26px; font-size: 27px; line-height: 1.35;
+    color: rgba(235,235,245,0.62); max-width: 22ch;
+  }
+  .tag {
+    margin-top: 40px; display: inline-flex; align-items: center; gap: 12px;
+    max-width: none; white-space: nowrap;
+    font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(235,235,245,0.50);
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #0A84FF; }
+</style>
+</head>
+<body>
+<div class="rules"></div>
+<div class="glow"></div>
+<div class="inner">
+  <div class="copy">
+    <h1>Talk to<br><em>your money.</em></h1>
+    <p>AI money &amp; net worth tracker, bilingual Arabic and English.</p>
+    <p class="tag"><span class="dot"></span>Hekta — on the App Store</p>
+  </div>
+  <div class="mark">
+    <svg width="248" height="248" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1024" height="1024" rx="228" fill="#0A84FF"/>
+      <g fill="#fff">
+        <rect x="214" y="317" width="195" height="493" rx="66"/>
+        <rect x="616" y="203" width="194" height="607" rx="66"/>
+        <rect x="404" y="466" width="216" height="172"/>
+      </g>
+    </svg>
+  </div>
+</div>
+</body>
+</html>
