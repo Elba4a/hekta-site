@@ -70,7 +70,7 @@
 /* ── the one money card (ج.4: one card, two figures) ─────────────────────── */
 .anchor {
   background: #EAF2FD;                     /* the accent-tinted anchor, content layer */
-  border-radius: var(--app-r-2xl);
+  border-radius: var(--app-r-xl);
   padding: 18px 20px 20px;
   box-shadow: inset 0 0 0 1px rgba(10,132,255,0.10);
 }
@@ -100,8 +100,10 @@
 
 /* ── quick actions ────────────────────────────────────────────────────────── */
 .quick { display: flex; justify-content: space-around; padding-block: 20px 4px; }
-.quick > span { display: grid; justify-items: center; gap: 6px; color: var(--app-accent-text); }
-.quick > span > span { font-size: 15px; font-weight: 500; }
+/* `> *` and not `> span`: Ask is a real <button> (it is the assistant's only door on
+   Home), and the four have to sit on one baseline whatever element each one is. */
+.quick > * { display: grid; justify-items: center; gap: 6px; color: var(--app-accent-text); }
+.quick > * > span { font-size: 15px; font-weight: 500; }
 
 /* ── list rows ────────────────────────────────────────────────────────────── */
 .alert { display: flex; gap: 10px; padding-block: 10px; align-items: flex-start; }
@@ -135,13 +137,13 @@
 
 .card {
   background: var(--app-surface);
-  border-radius: var(--app-r-lg);
+  border-radius: var(--app-r-md);
   padding: 12px 14px;
   margin-block-start: 8px;
 }
 .card .row { padding-block: 6px; }
 
-.navgroup { background: var(--app-surface); border-radius: var(--app-r-lg); overflow: hidden; margin-block-start: 8px; }
+.navgroup { background: var(--app-surface); border-radius: var(--app-r-md); overflow: hidden; margin-block-start: 8px; }
 .navrow {
   display: flex; align-items: center; gap: 12px; inline-size: 100%;
   padding: 13px 14px; text-align: start;
@@ -195,7 +197,7 @@
 
 .proposal {
   align-self: flex-start; inline-size: 82%;
-  background: #D6E6FA; border-radius: var(--app-r-xl); padding: 14px 16px;
+  background: #D6E6FA; border-radius: var(--app-r-lg); padding: 14px 16px;
 }
 .proposal h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
 .proposal dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 5px 12px; font-size: 16px; }
@@ -205,7 +207,7 @@
 .acts { display: grid; gap: 8px; align-self: flex-start; inline-size: 82%; }
 .acts__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .btn {
-  padding: 13px; border-radius: var(--app-r-pill); font-size: 17px; font-weight: 600; text-align: center;
+  padding: 13px; border-radius: var(--app-r-full); font-size: 17px; font-weight: 600; text-align: center;
 }
 .btn--fill { background: var(--app-accent-fill); color: #fff; }
 .btn--plain { background: var(--app-surface); color: var(--app-accent-text); }
@@ -213,7 +215,7 @@
 .composer {
   flex: none; margin: 0 16px 12px;
   display: flex; align-items: center; gap: 10px;
-  background: var(--app-surface); border-radius: var(--app-r-pill); padding: 12px 16px;
+  background: var(--app-surface); border-radius: var(--app-r-full); padding: 12px 16px;
 }
 .composer__hint { flex: 1 1 auto; color: var(--app-text-tertiary); font-size: 17px; }
 .composer__hint.is-typed { color: var(--app-text-primary); }
@@ -228,11 +230,23 @@
 .prompts { flex: none; display: flex; gap: 8px; overflow-x: auto; padding: 0 16px 10px; scrollbar-width: none; }
 .prompts::-webkit-scrollbar { display: none; }
 .chip {
-  flex: none; padding: 9px 14px; border-radius: var(--app-r-pill);
+  flex: none; padding: 9px 14px; border-radius: var(--app-r-full);
   background: var(--app-surface); color: var(--app-accent-text);
   font-size: 15px; white-space: nowrap;
 }
 .chip[disabled] { opacity: 0.45; cursor: default; }
+
+/* ── search ───────────────────────────────────────────────────────────────── */
+.search-head { display: flex; align-items: center; gap: 10px; padding-block: 4px 12px; }
+.search-head h1 { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+.field {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--app-surface); border-radius: var(--app-r-full);
+  padding: 11px 15px;
+}
+.field__icon { display: grid; place-items: center; color: var(--app-text-tertiary); }
+.field__icon svg { inline-size: 20px; block-size: 20px; }
+.field__hint { flex: 1 1 auto; color: var(--app-text-tertiary); font-size: 17px; }
 
 /* ── tab bar ──────────────────────────────────────────────────────────────── */
 .tabs {
@@ -247,19 +261,22 @@
   background: rgba(255,255,255,0.82);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
   backdrop-filter: saturate(180%) blur(24px);
-  border-radius: var(--app-r-pill);
+  border-radius: var(--app-r-full);
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 8px 24px -8px rgba(0,0,0,0.22);
   padding: 6px;
 }
 .tab {
   flex: 1 1 0; display: grid; justify-items: center; gap: 2px;
-  padding-block: 7px; border-radius: var(--app-r-pill);
+  padding-block: 7px; border-radius: var(--app-r-full);
   color: var(--app-text-primary);
   transition: background 180ms ease, color 180ms ease;
 }
 .tab span { font-size: 12px; font-weight: 500; letter-spacing: -0.1px; }
 .tab[aria-current="page"] { background: rgba(60,60,67,0.10); color: var(--app-accent); }
-.tab-ai {
+.tab-island {
+  /* The trailing `role="search"` island. Neutral glass, not an accent pill — it is a
+     tab-bar item that stands taller than the row, which is the bulge tabChromeHeight
+     has always carried. */
   flex: none; inline-size: 62px; block-size: 62px; border-radius: 31px;
   background: rgba(255,255,255,0.82);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
@@ -267,7 +284,7 @@
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 8px 24px -8px rgba(0,0,0,0.22);
   display: grid; place-items: center; color: var(--app-text-primary);
 }
-.tab-ai[aria-current="page"] { color: var(--app-accent); }
+.tab-island[aria-current="page"] { color: var(--app-accent); }
 
 /* The capsule is glass: it leans on backdrop-filter to blur the list scrolling under
    it. Where that is unsupported (or GPU-disabled) an 82%-white fill is not opaque
@@ -275,7 +292,7 @@
    surface instead. Same shape, no glass, still legible — the opaque fallback rule
    the app's own spec asks for. */
 @supports not ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
-  .tabs__capsule, .tab-ai { background: #F7F8FA; }
+  .tabs__capsule, .tab-island { background: #F7F8FA; }
 }
 
 @media (prefers-reduced-motion: reduce) {

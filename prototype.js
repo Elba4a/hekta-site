@@ -1,9 +1,14 @@
 /* The prototype: a working slice of Hekta, inside the phone on the page.
  *
- * Four screens and one flow. Navigation is real — the tab bar switches screens,
+ * Five screens and one flow. Navigation is real — the tab bar switches screens,
  * the assistant presents over them, and Apply mutates the store, so going back to
  * Home shows a balance that actually changed. That round trip is the product's
  * whole claim ("you run it by talking to it"), and a screenshot cannot make it.
+ *
+ * The trailing island is SEARCH, not the assistant: the shipped bar hands its
+ * `role="search"` item to `/search` (src/app/(app)/(tabs)/_layout.tsx), and the
+ * assistant lives in Home's quick actions. Depicting the old bar would be the one
+ * thing this page cannot afford — a phone that is not the phone in the store.
  *
  * The data below is synthetic and lifted verbatim from the App Store captures in
  * AppStoreAssets/Screenshots/en/6.9/ — same person, same amounts, same dates — so
@@ -66,7 +71,7 @@
   };
 
   // Each screen lights the room its own colour — stage.js eases toward it.
-  const TINT = { home: '#4A90E8', people: '#3FB262', vault: '#D2A44E', assistant: '#0A84FF' };
+  const TINT = { home: '#4A90E8', people: '#3FB262', vault: '#D2A44E', search: '#4A90E8', assistant: '#0A84FF' };
 
   const state = { screen: 'home', thread: [], busy: false, used: [] };
 
@@ -97,6 +102,7 @@
     vault:  '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6 2.6 7.4v1.5h18.8V7.4L12 2.6Zm-6.6 8v7.2H3.1v2.2h17.8v-2.2h-2.3v-7.2h-2.2v7.2h-2.1v-7.2h-2.2v7.2H9v-7.2H6.8v7.2H5.4v-7.2Z"/></svg>',
     spark:  '<svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l1.7 4.9 4.9 1.7-4.9 1.7L12 15.4l-1.7-4.9-4.9-1.7 4.9-1.7L12 2.2Z"/><path d="M18.6 14.4l.9 2.5 2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9.9-2.5Z"/><path d="M5.6 15.2l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7.7-1.9Z"/></svg>',
     mic:    '<svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><rect x="9" y="2.4" width="6" height="11.2" rx="3"/><path d="M5.4 11.4a6.6 6.6 0 0 0 13.2 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M12 18v3.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    search: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.9"/><path d="M15.9 15.9 21 21"/></svg>',
     add:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
     hist:   '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1"/><path d="M3.4 4.4v3.9h3.9"/><path d="M12 7.6V12l3 1.8"/></svg>',
     edit:   '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 19.5h4l10-10a2.1 2.1 0 0 0-3-3l-10 10v3Z"/></svg>',
@@ -139,14 +145,16 @@
         </div>
       </div>
 
-      <!-- Spans, not buttons: these are part of the screen the prototype shows but
-           they do nothing here, and a focusable control that does nothing is a trap
-           for anyone tabbing through. The tab bar and the assistant are the live
-           controls, and the caption under the phone says so. -->
+      <!-- Four actions, in the shipped order (QuickActions.tsx): Add · Scan · Ask ·
+           Transfer. ASK IS A REAL BUTTON — since 2026-08-27 it is the assistant's
+           door on Home, and the page's whole story hangs off reaching it. The other
+           three stay spans: they do nothing here, and a focusable control that does
+           nothing is a trap for anyone tabbing through. -->
       <div class="quick">
-        <span>${I.plus}<span>Add transaction</span></span>
-        <span>${I.swap}<span>Transfer</span></span>
+        <span>${I.plus}<span>Add</span></span>
         <span>${I.scan}<span>Scan</span></span>
+        <button type="button" data-go="assistant" aria-label="Ask the assistant">${I.spark}<span>Ask</span></button>
+        <span>${I.swap}<span>Transfer</span></span>
       </div>
 
       <h2 class="sec-title">Needs your attention</h2>
@@ -256,6 +264,43 @@
               <div class="row__s">${e.who}</div>
             </div>
             <div class="row__v">${money(e.v)}</div>
+          </div>`).join('')}
+      </div>`;
+    return s;
+  }
+
+  // ── search ────────────────────────────────────────────────────────────────
+  // The RESTING state, which is what you actually see on opening it: the field, what
+  // you looked for last, and three things to ask. No invented result set — the
+  // placeholder is the app's own string and it already names what search covers.
+  function searchScreen() {
+    const s = el('div', 'screen');
+    s.id = 'sc-search';
+    s.innerHTML = `
+      <div class="search-head">
+        <button class="circle-btn" type="button" data-close="1" aria-label="Close search">${I.back}</button>
+        <h1>Search</h1>
+      </div>
+      <div class="field">
+        <span class="field__icon">${I.search}</span>
+        <span class="field__hint">Search transactions, people, screens</span>
+      </div>
+      <h2 class="sec-title">Recent searches</h2>
+      <div class="card">
+        ${['Spotify', 'Trip to Alexandria'].map((q) => `
+          <div class="row">
+            <span class="row__badge" style="background:var(--app-accent-muted);color:var(--app-accent-text)">${I.clock}</span>
+            <div class="row__body"><div class="row__t">${q}</div></div>
+          </div>`).join('')}
+      </div>
+      <h2 class="sec-title">Try asking</h2>
+      <div class="card">
+        ${['Where did my money go this month?',
+           'What is due before the end of the month?',
+           'Who owes me money?'].map((q) => `
+          <div class="row">
+            <span class="row__badge" style="background:var(--app-accent-muted);color:var(--app-accent-text)">${I.spark}</span>
+            <div class="row__body"><div class="row__t">${q}</div></div>
           </div>`).join('')}
       </div>`;
     return s;
@@ -435,6 +480,7 @@
     home: homeScreen(),
     people: peopleScreen(),
     vault: vaultScreen(),
+    search: searchScreen(),
     assistant: assistantScreen(),
   };
 
@@ -453,12 +499,12 @@
     tabButtons[t.id] = b;
     capsule.appendChild(b);
   });
-  const ai = el('button', 'tab-ai', I.spark);
-  ai.type = 'button';
-  ai.setAttribute('aria-label', 'Open the assistant');
-  ai.addEventListener('click', () => go('assistant'));
-  tabButtons.assistant = ai;
-  tabs.append(capsule, ai);
+  const island = el('button', 'tab-island', I.search);
+  island.type = 'button';
+  island.setAttribute('aria-label', 'Search');
+  island.addEventListener('click', () => go('search'));
+  tabButtons.search = island;
+  tabs.append(capsule, island);
   mount.appendChild(tabs);
 
   const caption = document.getElementById('device-caption');
@@ -473,7 +519,7 @@
   switcher.setAttribute('role', 'tablist');
   switcher.setAttribute('aria-label', 'Prototype screen');
   const switchButtons = {};
-  [...TABS, { id: 'assistant', label: 'Assistant' }].forEach((t) => {
+  [...TABS, { id: 'search', label: 'Search' }, { id: 'assistant', label: 'Assistant' }].forEach((t) => {
     const b = el('button', 'switcher__btn', t.label);
     b.type = 'button';
     b.setAttribute('role', 'tab');
@@ -496,20 +542,25 @@
     Object.entries(switchButtons).forEach(([k, b]) => {
       b.setAttribute('aria-selected', String(k === id));
     });
-    // the assistant presents full-screen over the tabs, as it does in the app
-    tabs.hidden = id === 'assistant';
+    // both present over the tabs, as they do in the app — the assistant full-screen,
+    // search as a pushed route
+    tabs.hidden = id === 'assistant' || id === 'search';
     if (id === 'home') refreshHomeFigures(false);
     if (id === 'assistant') renderPrompts();
     if (window.hektaStage) window.hektaStage.setTint(TINT[id]);
     if (caption) {
       caption.textContent = id === 'assistant'
         ? 'Tap a suggestion — nothing saves until you confirm'
-        : 'Live prototype, on demo data — drive it';
+        : id === 'search'
+          ? 'One field for transactions, people and screens'
+          : 'Live prototype, on demo data — drive it';
     }
   }
 
   mount.addEventListener('click', (e) => {
-    if (e.target.closest('[data-close]')) go('home');
+    if (e.target.closest('[data-close]')) { go('home'); return; }
+    const jump = e.target.closest('[data-go]');
+    if (jump) go(jump.dataset.go);
   });
 
   if (caption && caption.parentElement) {
