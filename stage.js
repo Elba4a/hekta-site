@@ -2,8 +2,8 @@
  *
  * A receding engraved plane ruled into columns, a hard raking key light, film
  * grain against banding, and a pool of light that takes the colour of whatever
- * the phone is currently showing (prototype.js sets `tint`). That last uniform
- * is the whole point — the room answers the phone.
+ * the phone is showing. Nothing sets `tint` since the phone became App Store
+ * captures, so the pool stays the default blue.
  *
  * No library. Three.js would be ~600KB vendored to draw a single quad, and this
  * project ships no CDN and no build step. Everything here degrades to the CSS
@@ -199,7 +199,7 @@
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
   window.addEventListener('resize', () => { invalidate(); if (!running) drawOnce(); });
 
-  // prototype.js calls this on every screen change
+  // the tint hook; unused since the phone became App Store captures
   window.hektaStage = {
     setTint(hex) {
       const n = parseInt(hex.slice(1), 16);

@@ -21,11 +21,16 @@
   const TIGHT = ['.', ',', ':', '$', '/', '\u2192'];
 
   // Turn one element's text into a row of cells. Returns the animatable cells.
+  // Arabic letters join, and a cell per character would break every word apart,
+  // so a line in Arabic script gets one cell per WORD, and those never spin: a
+  // Latin alphabet flickering through an Arabic word is a glitch, not a board.
+  const JOINED = /[\u0600-\u06FF]/;
   function cellify(line, accentFrom = -1) {
     const text = line.textContent;
     line.textContent = '';
     const cells = [];
-    [...text].forEach((ch, i) => {
+    const joined = JOINED.test(text);
+    (joined ? text.split(/( )/).filter(Boolean) : [...text]).forEach((ch, i) => {
       const cell = document.createElement('span');
       const isSpace = ch === ' ';
       const isTight = TIGHT.indexOf(ch) !== -1;
@@ -42,7 +47,7 @@
       // its way back to a decimal point is a glitch; it belongs to the frame.
       // `idx` is the character's position in the ORIGINAL string, so a caller
       // retargeting these cells can index its new value directly.
-      if (!isSpace && !isTight) cells.push({ glyph, final: ch, idx: i });
+      if (!isSpace && !isTight && !joined) cells.push({ glyph, final: ch, idx: i });
     });
     return cells;
   }

@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hekta — AI money &amp; net worth tracker</title>
-<meta name="description" content="Log money by text, voice, or receipt scan. Track spending, gold, stocks, crypto, and net worth in one private app — bilingual Arabic &amp; English, no ads, no tracking.">
+<title>Hekta — Money that logs itself</title>
+<meta name="description" content="Connect your bank messages and Apple Pay taps once, and Hekta logs your spending for you. Arabic and English. No ads, no tracking.">
 <meta name="theme-color" content="#000000">
+<meta name="apple-itunes-app" content="app-id=6778138657">
 <link rel="canonical" href="https://hekta.money/">
+<link rel="alternate" hreflang="en" href="https://hekta.money/">
+<link rel="alternate" hreflang="ar" href="https://hekta.money/ar/">
+<link rel="alternate" hreflang="x-default" href="https://hekta.money/">
 
 <!-- The mark is drawn, not linked: coordinates measured off assets/hekta-appicon-1024.png
      (stems 214,317 195x493 and 616,203 194x607 — the right stem really is 114 units
@@ -16,18 +20,24 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hekta">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
 <meta property="og:url" content="https://hekta.money/">
-<meta property="og:title" content="Hekta — AI money &amp; net worth tracker">
-<meta property="og:description" content="Everything you spend, own, and share, in one private app you run mostly just by talking to it.">
+<meta property="og:title" content="Hekta — Money that logs itself">
+<meta property="og:description" content="Connect your bank messages and Apple Pay taps once, and Hekta logs your spending for you. Ask where your money went, in Arabic or English. No ads, no tracking.">
 <meta property="og:image" content="https://hekta.money/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Talk to your money — Hekta, on the App Store.">
+<meta property="og:image:alt" content="Money that logs itself — Hekta, available on the App Store.">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="app.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"MobileApplication","name":"Hekta","operatingSystem":"iOS 17.0 or later","applicationCategory":"FinanceApplication","inLanguage":["en","ar"],"installUrl":"https://apps.apple.com/app/id6778138657?pt=128678990&ct=site-jsonld&mt=8","url":"https://hekta.money/","description":"Connect your bank messages and Apple Pay taps once, and Hekta logs your spending for you.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://hekta.money/#org"}},
+{"@type":"Organization","@id":"https://hekta.money/#org","name":"Hekta","url":"https://hekta.money/","logo":"https://hekta.money/apple-touch-icon.png","email":"support@hekta.money"}
+]}
+</script>
 </head>
 <body>
 <!--
@@ -36,10 +46,10 @@
   OWN-WORLD: a currency rate board. Near-black metal, engraved column rules, split-flap
   cells, one blue (#0A84FF) owning whole bands. One typeface: the system stack; the
   signage voice comes from cell geometry, not a display face.
-  STORY: this is a money app you run by talking to it — drive it here, then install it.
+  STORY: money that logs itself — connect a source once, then install it.
   FIRST VIEWPORT: board ground; flap headline resolving once, top-left; the live phone
-  centre-right, lighting the board it stands on; App Store link and an inert Google Play
-  plate beneath the headline.
+  centre-right (the App Store captures, swapped per story block), lighting the board it
+  stands on; Apple's own App Store badge beneath the headline, once per page.
   FORM: rate board, #2 of seven derived worlds; owner-pinned after declining a menu.
   FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
   review, the verdict, and DESIGN.md.
@@ -55,7 +65,8 @@
 <div class="page">
 <header class="wrap masthead">
   <span class="wordmark"><svg class="mark" width="26" height="26" viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" rx="228" fill="#0A84FF"/><g fill="#fff"><rect x="214" y="317" width="195" height="493" rx="66"/><rect x="616" y="203" width="194" height="607" rx="66"/><rect x="404" y="466" width="216" height="172"/></g></svg>Hekta</span>
-  <span class="masthead__meta"><span class="live-dot"></span>Live on the App Store</span>
+  <span class="masthead__meta"><span class="live-dot"></span>Hekta 2.0 is on the App Store</span>
+  <a class="masthead__lang" href="/ar/" hreflang="ar" lang="ar">العربية</a>
 </header>
 
 <main id="main">
@@ -64,75 +75,72 @@
   <section class="wrap showcase">
 
     <div class="hero-block">
-      <p class="eyebrow">AI money &amp; net worth tracker</p>
+      <p class="eyebrow">Money &amp; net worth, in Arabic and English</p>
 
       <h1 class="flap">
-        <span class="flap__line">TALK TO</span>
-        <span class="flap__line" data-accent-from="0">YOUR MONEY.</span>
+        <span class="flap__line">MONEY THAT</span>
+        <span class="flap__line" data-accent-from="0">LOGS ITSELF.</span>
       </h1>
 
       <p class="hero__lede">
-        Everything you spend, own, and share, in one private app you run mostly just by
-        talking to it. <strong>The phone here is live. Drive it.</strong>
+        Connect your bank messages and Apple Pay taps once, and Hekta logs your spending
+        for you, without opening the app. <strong>Ask where your money went, in Arabic or English.</strong>
       </p>
 
       <div class="plates">
-        <a class="plate plate--store" href="https://apps.apple.com/app/id6778138657">
-          <svg width="26" height="30" viewBox="0 0 24 28" fill="currentColor" aria-hidden="true"><path d="M17.6 14.8c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1s-2.3-1-3.8-1c-2 0-3.8 1.1-4.8 2.9-2 3.5-.5 8.8 1.5 11.7 1 1.4 2.1 3 3.6 2.9 1.5-.1 2-.9 3.8-.9s2.3.9 3.8.9c1.6 0 2.6-1.4 3.5-2.9 1.1-1.6 1.6-3.2 1.6-3.3-.1 0-3.1-1.2-3.1-4.5ZM14.8 5.6c.8-1 1.3-2.4 1.2-3.8-1.2 0-2.7.8-3.5 1.8-.8.9-1.4 2.3-1.2 3.7 1.3.1 2.7-.7 3.5-1.7Z"/></svg>
-          <span><span class="plate__sub">Download on the</span><span class="plate__main">App Store</span></span>
+        <a class="badge" href="https://apps.apple.com/app/id6778138657?pt=128678990&amp;ct=site-hero&amp;mt=8">
+          <img src="badges/app-store-en.svg" alt="Download on the App Store" width="159" height="53">
         </a>
-        <span class="plate plate--soon">
-          <svg width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M3.2 1.6a1.6 1.6 0 0 0-.7 1.3v20.2c0 .5.3 1 .7 1.3L14 13 3.2 1.6Zm12.5 9.7L5.6 1.1l11.9 6.8-1.8 3.4Zm0 3.4 1.8 3.4-11.9 6.8 10.1-10.2Zm2.9-5.3 2.6 1.5c.9.5.9 1.9 0 2.4l-2.6 1.5L16.6 13l2-3.6Z"/></svg>
-          <span><span class="plate__sub">Android</span><span class="plate__main">Coming soon</span></span>
-        </span>
       </div>
     </div>
 
 
     <div class="showcase__story">
 
-      <!-- 01 — the AI input layer -->
-      <section class="story" id="talk" data-screen="assistant">
+      <!-- 01 — the three Sources -->
+      <section class="story" id="sources" data-screen="sources">
         <span class="story__no" data-flap>01</span>
-        <p class="story__eyebrow">The AI input layer</p>
-        <h2>Skip the forms.<br>Just <em>say it</em>.</h2>
+        <p class="story__eyebrow">Three sources</p>
+        <h2>Connect it <em>once</em>.</h2>
         <p class="story__lede">
-          Type it, speak it, or photograph it. Hekta turns it into a clean record you confirm.
+          Your bank&#8217;s messages and your Apple Pay taps become rows in your Feed, without
+          opening the app. And you can always write one yourself.
         </p>
         <ul class="entries">
           <li>
-            <dfn>Text</dfn>
-            <p><span class="quote">&#8220;spent 50 on coffee at Starbucks&#8221;</span> &#8594; a categorized transaction.</p>
+            <dfn>Bank messages</dfn>
+            <p>One Shortcuts automation hands Hekta each message your bank sends. Hekta reads CIB, NBE, QNB and more by fixed rules, and its AI reads the rest.</p>
           </li>
           <li>
-            <dfn>Voice</dfn>
-            <p>Tap the mic and say it, logged in seconds.</p>
+            <dfn>Apple Pay taps</dfn>
+            <p>An in-store tap logs itself, with the merchant and the amount. Online purchases still arrive from your bank&#8217;s message.</p>
           </li>
           <li>
-            <dfn>Receipt &amp; SMS</dfn>
-            <p>Photograph a paper receipt or a bank SMS screenshot and Hekta reads the amount, merchant, and date.</p>
-          </li>
-          <li>
-            <dfn>Or just ask</dfn>
-            <p>&#8220;How much did I spend on restaurants in March?&#8221;</p>
+            <dfn>You</dfn>
+            <p>Write what you spent in the bar, paste a message, share or photograph a receipt, or tell Siri <span class="quote">&#8220;Log an expense with Hekta&#8221;</span>.</p>
           </li>
         </ul>
-        <p class="pin"><strong>Nothing is ever saved until you tap confirm</strong> &mdash; the assistant only proposes.</p>
+        <p class="pin">A row read by fixed rules, from a bank Hekta knows or an Apple Pay tap, saves on its own, and every one can be undone. <strong>Anything the AI reads waits for you to confirm it.</strong> Any source can be switched to &#8220;Ask me first&#8221;.</p>
       </section>
 
-      <!-- 02 — daily money -->
-      <section class="story" id="daily" data-screen="home">
+      <!-- 02 — the Feed and the bar -->
+      <section class="story" id="feed" data-screen="ask">
         <span class="story__no" data-flap>02</span>
-        <p class="story__eyebrow">Your day-to-day</p>
+        <p class="story__eyebrow">One Feed, one bar</p>
         <h2>What you have, and what&#8217;s <em>already spoken for</em>.</h2>
         <p class="story__lede">
-          One card, two figures: the money in your accounts, and what is genuinely left once
-          your budgets, subscriptions and instalments are counted.
+          Your balance and what&#8217;s left to spend share one card at the top of the Feed,
+          with a bar that shows your pace through the month. Below it is everything that
+          happened, day by day.
         </p>
         <ul class="entries">
           <li>
-            <dfn>Accounts</dfn>
-            <p>Every account in its own currency, and one balance across all of them.</p>
+            <dfn>Ask</dfn>
+            <p>One bar, two jobs. Ask where your money went, what&#8217;s due, who owes you or what you&#8217;re worth, or write what you spent. Nothing you write is saved until you confirm it.</p>
+          </li>
+          <li>
+            <dfn>Free answers</dfn>
+            <p>The common questions are answered from your own data straight away and <strong>do not use your AI allowance</strong>.</p>
           </li>
           <li>
             <dfn>Budgets</dfn>
@@ -140,25 +148,21 @@
           </li>
           <li>
             <dfn>What&#8217;s coming</dfn>
-            <p>Subscriptions and instalment plans, due before they surprise you.</p>
+            <p>Subscriptions and instalment plans, and what&#8217;s due next.</p>
           </li>
           <li>
-            <dfn>Analytics</dfn>
-            <p>Daily, weekly, monthly, yearly, and trends. Plus a recap of your week each Sunday, and your year each December.</p>
+            <dfn>Everything</dfn>
+            <p>Accounts, transfers and categories. Every list is in Everything, behind the icon at the top of the Feed.</p>
           </li>
           <li>
-            <dfn>Search</dfn>
-            <p>One field for transactions, people, and every screen in the app.</p>
-          </li>
-          <li>
-            <dfn>Widgets</dfn>
-            <p>Home Screen and Lock Screen widgets, and Control Center controls.</p>
+            <dfn>Recaps &amp; widgets</dfn>
+            <p>A recap of your week each Sunday and your year each December. Home Screen and Lock Screen widgets, and a Control Center control.</p>
           </li>
         </ul>
       </section>
 
       <!-- 03 — net worth -->
-      <section class="story" id="own" data-screen="vault">
+      <section class="story" id="own" data-screen="worth">
         <span class="story__no" data-flap>03</span>
         <p class="story__eyebrow">The Vault</p>
         <h2>Everything you <em>own</em>, priced today.</h2>
@@ -183,13 +187,13 @@
       </section>
 
       <!-- 04 — shared -->
-      <section class="story" id="split" data-screen="people">
+      <section class="story" id="split" data-screen="group">
         <span class="story__no" data-flap>04</span>
         <p class="story__eyebrow">People</p>
         <h2>What you <em>split</em>, settled.</h2>
         <p class="story__lede">
-          A trip, a flat, a family. Hekta tracks who paid, works out who owes whom, and
-          suggests the fewest transfers that clear it.
+          A trip, a flat, a family. Hekta tracks who paid and works out who owes whom.
+          Groups are free, with no limit.
         </p>
         <ul class="entries">
           <li>
@@ -197,16 +201,12 @@
             <p>Equally, by shares, by exact amounts, or by percentage.</p>
           </li>
           <li>
-            <dfn>Split a receipt</dfn>
-            <p>Scan it, check the lines, tap who had what, and settle up.</p>
-          </li>
-          <li>
             <dfn>Settle up</dfn>
-            <p>Balances per person, per currency, with suggested settlements.</p>
+            <p>Balances per person and per currency, and a settle-up to clear them.</p>
           </li>
           <li>
             <dfn>Lending</dfn>
-            <p>Money lent to one person, tracked on its own, without a group.</p>
+            <p>A private record of what you lent and borrowed, person by person. Share it with another Hekta user when you both agree.</p>
           </li>
           <li>
             <dfn>Family</dfn>
@@ -221,19 +221,22 @@
       <div class="device-mount">
         <div class="device">
           <div class="device__screen">
-            <div class="app" id="app">
-              <noscript>
-                <p style="padding:24px;font-size:15px;line-height:1.5">
-                  The interactive prototype needs JavaScript. Hekta itself does not.
-                  <a href="https://apps.apple.com/app/id6778138657">Download it from the App Store</a>.
-                </p>
-              </noscript>
-            </div>
+            <img class="shot is-on" data-shot="feed" src="shots/en/01-feed.jpg" alt="The Feed: total balance, what&#8217;s left to spend, and the day&#8217;s rows." width="660" height="1434">
+            <img class="shot" data-shot="sources" src="shots/en/02-sources.jpg" alt="Sources: bank messages and Apple Pay, connected once through Shortcuts." width="660" height="1434" loading="lazy">
+            <img class="shot" data-shot="ask" src="shots/en/03-ask.jpg" alt="The bar answering &#8220;Where did my money go?&#8221; by category." width="660" height="1434" loading="lazy">
+            <img class="shot" data-shot="worth" src="shots/en/05-worth.jpg" alt="&#8220;What am I worth?&#8221;: bitcoin, gold by karat and stocks, priced." width="660" height="1434" loading="lazy">
+            <img class="shot" data-shot="group" src="shots/en/07-group.jpg" alt="A group: what it owes you, what it cost you, and settle up." width="660" height="1434" loading="lazy">
             <div class="device__gloss"></div>
           </div>
         </div>
       </div>
-      <p class="device__caption" id="device-caption">Live prototype — tap the tabs</p>
+      <div class="switcher" role="tablist" aria-label="Screens">
+        <button class="switcher__btn" role="tab" data-shot="feed" aria-selected="true">Feed</button>
+        <button class="switcher__btn" role="tab" data-shot="sources" aria-selected="false">Sources</button>
+        <button class="switcher__btn" role="tab" data-shot="ask" aria-selected="false">Ask</button>
+        <button class="switcher__btn" role="tab" data-shot="worth" aria-selected="false">Vault</button>
+        <button class="switcher__btn" role="tab" data-shot="group" aria-selected="false">People</button>
+      </div>
     </div>
 
   </section>
@@ -322,7 +325,7 @@
       </li>
       <li>
         <dfn>Nothing kept</dfn>
-        <p>Receipts are processed once and then deleted; your voice recordings are never stored by us.</p>
+        <p>Receipt photos are deleted once the transaction is saved. Hekta never stores your voice.</p>
       </li>
       <li>
         <dfn>Locked to you</dfn>
@@ -330,7 +333,7 @@
       </li>
       <li>
         <dfn>Yours to take</dfn>
-        <p>Export your data to CSV anytime, and delete your account and everything in it from inside the app.</p>
+        <p>Export your transactions to CSV for free, and delete your account and all its data from inside the app at any time.</p>
       </li>
     </ul>
   </section>
@@ -346,12 +349,11 @@
         <p class="tier__name">Free — with room to work</p>
         <p class="tier__price"><span data-flap>$0</span></p>
         <ul>
-          <li>50 AI messages and 15 receipt scans each month</li>
-          <li>100 bank-SMS captures each month</li>
+          <li>Bank messages read by fixed rules &mdash; free, and never counted</li>
+          <li>50 AI messages, 15 receipt scans and 100 bank messages read by AI, each month</li>
           <li>5 assets, 3 budgets, 10 subscriptions, 10 custom categories</li>
           <li>Groups, shared expenses and lending &mdash; free, always</li>
           <li>Unlimited transactions, and CSV export</li>
-          <li>The last 90 days of analytics</li>
         </ul>
       </div>
       <div class="tier tier--paid">
@@ -359,11 +361,10 @@
         <p class="tier__price"><span data-flap>$4.99</span><span class="tier__period">/month &#183; $39.99/year</span></p>
         <p class="tier__note">Both plans start with a 1-month free trial.</p>
         <ul>
-          <li>Unlimited AI messages, voice, and receipt scans</li>
+          <li>No monthly limit on AI messages, receipt scans or AI-read bank messages</li>
           <li>Unlimited assets, budgets, subscriptions, and categories</li>
-          <li>Your full analytics history, beyond the last 90 days</li>
-          <li>Family sharing for up to 5 people</li>
-          <li>PDF reports for any date range</li>
+          <li>A family circle of up to 5 people</li>
+          <li>A PDF report of your money</li>
         </ul>
       </div>
     </div>
@@ -374,22 +375,13 @@
     </p>
   </section>
 
-  <!-- ── close ───────────────────────────────────────────────────────────── -->
+  <!-- ── close: one App Store badge per layout (Apple), so this is a text link ── -->
   <section class="wrap close-band">
     <h2 class="flap">
       <span class="flap__line">YOUR WHOLE</span>
       <span class="flap__line">FINANCIAL LIFE.</span>
     </h2>
-    <div class="plates">
-      <a class="plate plate--store" href="https://apps.apple.com/app/id6778138657">
-        <svg width="26" height="30" viewBox="0 0 24 28" fill="currentColor" aria-hidden="true"><path d="M17.6 14.8c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1s-2.3-1-3.8-1c-2 0-3.8 1.1-4.8 2.9-2 3.5-.5 8.8 1.5 11.7 1 1.4 2.1 3 3.6 2.9 1.5-.1 2-.9 3.8-.9s2.3.9 3.8.9c1.6 0 2.6-1.4 3.5-2.9 1.1-1.6 1.6-3.2 1.6-3.3-.1 0-3.1-1.2-3.1-4.5ZM14.8 5.6c.8-1 1.3-2.4 1.2-3.8-1.2 0-2.7.8-3.5 1.8-.8.9-1.4 2.3-1.2 3.7 1.3.1 2.7-.7 3.5-1.7Z"/></svg>
-        <span><span class="plate__sub">Download on the</span><span class="plate__main">App Store</span></span>
-      </a>
-      <span class="plate plate--soon">
-        <svg width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M3.2 1.6a1.6 1.6 0 0 0-.7 1.3v20.2c0 .5.3 1 .7 1.3L14 13 3.2 1.6Zm12.5 9.7L5.6 1.1l11.9 6.8-1.8 3.4Zm0 3.4 1.8 3.4-11.9 6.8 10.1-10.2Zm2.9-5.3 2.6 1.5c.9.5.9 1.9 0 2.4l-2.6 1.5L16.6 13l2-3.6Z"/></svg>
-        <span><span class="plate__sub">Android</span><span class="plate__main">Coming soon</span></span>
-      </span>
-    </div>
+    <p class="close-band__link"><a href="https://apps.apple.com/app/id6778138657?pt=128678990&amp;ct=site-close&amp;mt=8">Hekta is available on the App Store &#8594;</a></p>
   </section>
 
 </main>
@@ -400,16 +392,17 @@
     <li><a href="https://legal.hekta.money/terms/">Terms of Use</a></li>
     <li><a href="https://legal.hekta.money/support/">Support</a></li>
     <li><a href="mailto:support@hekta.money">support@hekta.money</a></li>
+    <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
   </ul>
   <p class="fine">
     Hekta — a personal financial operating system for the Arab world.
-    The prototype above runs on synthetic demo data.
+    The screens above are App Store captures on demo data.
   </p>
 </footer>
 </div>
 
 <script src="stage.js" defer></script>
 <script src="board.js" defer></script>
-<script src="prototype.js" defer></script>
+<script src="phone.js" defer></script>
 </body>
 </html>

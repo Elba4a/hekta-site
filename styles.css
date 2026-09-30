@@ -97,6 +97,13 @@ img, svg { max-inline-size: 100%; block-size: auto; }
   color: var(--ink-2); font-variant-numeric: tabular-nums;
   display: flex; align-items: center; gap: var(--s2);
 }
+.masthead__meta { margin-inline-start: auto; }
+.masthead__lang {
+  font-size: 15px; color: var(--ink-2); text-decoration: none;
+  padding: 10px 4px; min-block-size: 44px; display: inline-flex; align-items: center;
+}
+.masthead__lang:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 560px) { .masthead__meta { display: none; } .masthead__lang { margin-inline-start: auto; } }
 .live-dot {
   inline-size: 7px; block-size: 7px; border-radius: 50%;
   background: var(--accent); box-shadow: 0 0 0 0 rgba(10,132,255,0.55);
@@ -159,26 +166,10 @@ img, svg { max-inline-size: 100%; block-size: auto; }
 
 /* ── store plates ─────────────────────────────────────────────────────────── */
 .plates { display: flex; flex-wrap: wrap; gap: var(--s3); margin-block-start: var(--s6); }
-.plate {
-  display: inline-flex; align-items: center; gap: var(--s3);
-  padding: 12px var(--s5) 12px var(--s4);
-  border-radius: var(--s3);
-  text-decoration: none;
-  font-family: var(--ui);
-  line-height: 1.15;
-}
-.plate svg { flex: none; }
-.plate__sub { display: block; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; opacity: 0.9; }
-.plate__main { display: block; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
-
-.plate--store { background: #FFFFFF; color: #000000; }
-.plate--store:hover { background: #E9EBEF; }
-.plate--soon {
-  background: transparent; color: var(--ink-2);
-  box-shadow: inset 0 0 0 1px var(--rule-2);
-  cursor: default;
-}
-.plate--soon .plate__main { color: var(--ink); }
+/* Apple's own badge artwork, never redrawn: >= 40px high, a quarter of its height
+   clear all round, once per page (App Store Marketing Guidelines). */
+.badge { display: inline-block; padding: 12px; margin: -12px; }
+.badge img { display: block; block-size: 53px; inline-size: auto; }
 
 /* ── the device ───────────────────────────────────────────────────────────── */
 .device-mount { perspective: 1800px; display: flex; justify-content: center; justify-self: end; }
@@ -224,7 +215,7 @@ img, svg { max-inline-size: 100%; block-size: auto; }
   /* concentric with the body: the glass radius is the body's less the bezel */
   border-radius: calc(var(--r-device) - var(--bezel));
   overflow: hidden;
-  background: var(--app-background);
+  background: #F7F5F2;                        /* the app's light background, behind a loading capture */
   isolation: isolate;
 }
 /* Below the sticky width the phone is inline, so it is sized by WIDTH rather than
@@ -235,6 +226,14 @@ img, svg { max-inline-size: 100%; block-size: auto; }
   .device__screen { block-size: auto; inline-size: min(330px, 84vw); }
 }
 @media (max-width: 420px) { .device { --r-device: 44px; } }
+
+/* The App Store captures, stacked; phone.js lights one per story block. */
+.shot {
+  position: absolute; inset: 0; inline-size: 100%; block-size: 100%;
+  object-fit: cover; opacity: 0; transition: opacity 320ms ease;
+}
+.shot.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .shot { transition: none; } }
 
 /* the glass sheen rides above the UI but must never eat a tap */
 .device__gloss {
@@ -330,7 +329,7 @@ img, svg { max-inline-size: 100%; block-size: auto; }
 @media (max-width: 960px) {
   /* One column: the offer, then the phone, then the story. The phone stops being
      pinned here — a sticky device eats half a phone screen — so the page no longer
-     drives it and the visitor taps instead (prototype.js gates on the same width). */
+     drives it and the visitor uses the switcher instead (phone.js gates on the same width). */
   .showcase { grid-template-columns: 1fr; gap: var(--s6); }
   .hero-block  { grid-column: 1; grid-row: 1; min-block-size: 0; padding-block: var(--s5) 0; }
   .showcase__device { grid-column: 1; grid-row: 2; position: static; }
@@ -403,7 +402,9 @@ img, svg { max-inline-size: 100%; block-size: auto; }
   margin: 0 auto; max-inline-size: 18ch;
   font-size: clamp(30px, 4.6vw, 58px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
 }
-.close-band .plates { justify-content: center; }
+.close-band__link { margin: var(--s6) 0 0; font-size: 17px; }
+.close-band__link a { color: var(--accent); text-decoration: none; }
+.close-band__link a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .site-footer { border-block-start: 1px solid var(--rule); padding-block: var(--s6) var(--s8); }
 .footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--s5); margin: 0 0 var(--s4); padding: 0; }
@@ -504,7 +505,7 @@ img, svg { max-inline-size: 100%; block-size: auto; }
 
 /* ── the screen switcher under the device ─────────────────────────────────
    Hidden at the widths where the page drives the phone; the only driver below
-   that, where the device is inline and its own tab bar is a scaled-down target. */
+   that, where the device is inline and scrolls away with the hero. */
 .switcher {
   display: none;
   justify-content: center; flex-wrap: wrap; gap: var(--s2);
@@ -526,3 +527,16 @@ img, svg { max-inline-size: 100%; block-size: auto; }
   box-shadow: none;
   color: #fff;
 }
+
+/* ── Arabic (/ar/) ─────────────────────────────────────────────────────────
+   Tracking and uppercase are Latin signage devices: letter-spacing tears Arabic
+   letters apart and there is no case. The headline's cells hold words, not letters
+   (board.js), so they need room for Arabic's taller ascenders and descenders. */
+:lang(ar) { letter-spacing: 0 !important; text-transform: none !important; }
+.flap:lang(ar) { line-height: 1.2; }
+.flap:lang(ar) .flap__cell { block-size: 1.45em; padding-inline: 0.18em; }
+:lang(ar) .story__eyebrow, :lang(ar) .entries dfn, :lang(ar) .kicker,
+:lang(ar) .eyebrow, :lang(ar) .masthead__meta { font-size: 14px; }
+/* Figures read left to right in both locales: a flex row of digit cells would
+   otherwise lay "01" out as "10" under dir="rtl". */
+[data-flap] { direction: ltr; }
